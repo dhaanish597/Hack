@@ -9,13 +9,8 @@ const __dirname = dirname(__filename);
 
 const app = express();
 
-// Configure CORS
-app.use(cors({
-  origin: 'http://localhost:5173', // Vite's default port
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-  credentials: true
-}));
+// Configure CORS - make it more permissive for testing
+app.use(cors());  // This allows all origins temporarily
 
 app.use(express.json());
 

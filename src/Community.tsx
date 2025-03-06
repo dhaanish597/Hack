@@ -16,8 +16,15 @@ const CommunityForum: React.FC = () => {
 
   const loadPosts = async () => {
     try {
-      const response = await fetch("http://localhost:3000/posts"); // Fixed port to match backend
+      console.log("Fetching posts...");
+      const response = await fetch("http://localhost:3000/posts");
+      
+      console.log("Response status:", response.status);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
+      console.log("Received posts:", data);
       setPosts(data);
     } catch (error) {
       console.error("Error loading posts:", error);
@@ -31,9 +38,10 @@ const CommunityForum: React.FC = () => {
   const handleCreatePost = async (e: React.FormEvent) => {
     e.preventDefault();
     const newPost = { username, title, content };
+    console.log("Attempting to create post:", newPost);
 
     try {
-      const response = await fetch("http://localhost:3000/posts", { // Fixed port
+      const response = await fetch("http://localhost:3000/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,18 +49,21 @@ const CommunityForum: React.FC = () => {
         body: JSON.stringify(newPost),
       });
 
-      if (response.ok) {
-        setUsername("");
-        setTitle("");
-        setContent("");
-        loadPosts();
-      } else {
-        const errorData = await response.json();
-        alert(`Failed to create post: ${errorData.error}`);
+      console.log("Response status:", response.status);
+      const data = await response.json();
+      console.log("Response data:", data);
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create post');
       }
+
+      setUsername("");
+      setTitle("");
+      setContent("");
+      loadPosts();
     } catch (error) {
       console.error("Error creating post:", error);
-      alert("Failed to create post. Please try again.");
+      alert(error.message || "Failed to create post. Please try again.");
     }
   };
 

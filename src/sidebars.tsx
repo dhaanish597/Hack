@@ -8,7 +8,7 @@ const Sidebar: React.FC = () => {
   return (
     <nav className="sidebar">
       <div className="logo">
-        <img src="/assets/logo.png" alt="Logo" className="logo-img" />
+        <img src="logo1.jpg" alt="Logo" className="log-img" />
         <h2>AgriTech</h2>
       </div>
       <ul className="nav-links">
@@ -37,7 +37,7 @@ const Sidebar: React.FC = () => {
           </Link>
         </li>
         <li>
-          <Link to="/analytics">
+          <Link to="#">
             <FaChartLine />
             <span>Analytics</span>
           </Link>

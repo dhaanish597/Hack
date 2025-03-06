@@ -8,6 +8,7 @@ import CropFertilizerRecommendation from "./soilPrediction";
 import ChatBot from "./chatBot";
 import Community from "./Community";
 import "./app.css";
+//import Analysis from "./Analysis";
 //import SoilPrediction from "./SoilPrediction";
 //import Analytics from "./Analytics";
 //import Community from "./Community";
