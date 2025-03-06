@@ -4,6 +4,7 @@ import Sidebar from "./sidebars";
 import Home from "./homes";
 import Login from "./login";
 import Profile from "./profile";
+import CropFertilizerRecommendation from "./soilPrediction";
 import "./app.css";
 //import SoilPrediction from "./SoilPrediction";
 //import Analytics from "./Analytics";
@@ -20,6 +21,7 @@ const App: React.FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/soil-prediction" element={<CropFertilizerRecommendation />} />
             {//<Route path="/soil-prediction" element={<SoilPrediction />} />
             //<Route path="/analytics" element={<Analytics />} />
             //<Route path="/community" element={<Community />} />
