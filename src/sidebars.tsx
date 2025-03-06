@@ -1,6 +1,8 @@
 import React from "react";
-import { FaHome, FaUser, FaSeedling, FaChartLine, FaUsers } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaHome, FaUser, FaSeedling, FaChartLine, FaUsers, FaRobot } from "react-icons/fa";
 import "./app.css";
+import { Fa1, FaBots } from "react-icons/fa6";
 
 const Sidebar: React.FC = () => {
   return (
@@ -11,34 +13,40 @@ const Sidebar: React.FC = () => {
       </div>
       <ul className="nav-links">
         <li>
-          <a href="/home">
+          <Link to="/home">
             <FaHome />
             <span>Home</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/profile">
+          <Link to="/profile">
             <FaUser />
             <span>Profile</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/soil-prediction">
+          <Link to="/ChatBot">
+            <FaRobot />
+            <span>ChatBot</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/soil-prediction">
             <FaSeedling />
             <span>Soil Prediction</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/analytics">
+          <Link to="/analytics">
             <FaChartLine />
             <span>Analytics</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/community">
+          <Link to="/community">
             <FaUsers />
             <span>Community</span>
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
