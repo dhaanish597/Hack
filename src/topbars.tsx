@@ -1,27 +1,21 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import "./app.css";
+import { useNavigate } from "react-router-dom";
+import "./App.css";
 
 const Topbar: React.FC = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isLoginPage = location.pathname === "/login";
 
   return (
-    <header className="top-bar">
-      <div className="auth-buttons">
-        {!isLoginPage && (
-          <>
-            <button className="login-btn" onClick={() => navigate("/login")}>
-              Login
-            </button>
-            <button className="signup-btn" onClick={() => navigate("/login")}>
-              Sign Up
-            </button>
-          </>
-        )}
+    <div className="topbar">
+      <div className="topbar-right">
+        <button 
+          className="login-button"
+          onClick={() => navigate("/login")}
+        >
+          Login
+        </button>
       </div>
-    </header>
+    </div>
   );
 };
 

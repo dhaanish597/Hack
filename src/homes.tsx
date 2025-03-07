@@ -17,24 +17,26 @@ const homes: React.FC = () => {
   ];
 
   return (
-    <div className="crop-image-layout">
-      <img
-        src="https://www.trenpa.in/cdn/shop/articles/artificial-intelligance-agriculture.webp?v=1735886109"
-        alt="Agriculture AI Banner"
-        className="crop-image-banner"
-      />
-      <h1 className="crop-image-title">Crop Image Layout</h1>
-      <div className="crop-image-grid">
-        {crops.map((crop, index) => (
-          <figure key={index} className="crop-image-card">
-            <img src={crop.img} alt={crop.name} />
-            <figcaption className="crop-image-caption">{crop.emoji} {crop.name}</figcaption>
-          </figure>
-        ))}
+    <div>
+      <Topbar />
+      <div className="crop-image-layout">
+        <img
+          src="https://www.trenpa.in/cdn/shop/articles/artificial-intelligance-agriculture.webp?v=1735886109"
+          alt="Agriculture AI Banner"
+          className="crop-image-banner"
+        />
+        <h1 className="crop-image-title">Crop Image Layout</h1>
+        <div className="crop-image-grid">
+          {crops.map((crop, index) => (
+            <figure key={index} className="crop-image-card">
+              <img src={crop.img} alt={crop.name} />
+              <figcaption className="crop-image-caption">{crop.emoji} {crop.name}</figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
-
 
 export default homes;

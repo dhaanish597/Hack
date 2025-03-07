@@ -10,11 +10,21 @@ const Login = () => {
     setIsActive(!isActive);
   };
 
+  const handleSignIn = (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent form submission
+    navigate("/index.html");
+  };
+
+  const handleSignUp = (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent form submission
+    // Add signup logic here
+  };
+
   return (
     <div className="login-body">
       <div className={`login-container ${isActive ? "active" : ""}`} id="login-container">
         <div className="form-container sign-up">
-          <form>
+          <form onSubmit={handleSignUp}>
             <h1>Create Account</h1>
             <div className="social-icons">
               <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
@@ -26,12 +36,14 @@ const Login = () => {
             <input type="text" placeholder="Name" />
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
-            <button type="submit">Sign Up</button>
+            <button type="submit" className="sign-up-btn">
+              Sign Up
+            </button>
           </form>
         </div>
 
         <div className="form-container sign-in">
-          <form>
+          <form onSubmit={handleSignIn}>
             <h1>Sign In</h1>
             <div className="social-icons">
               <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
@@ -43,14 +55,9 @@ const Login = () => {
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
             <a href="#">Forgot your password?</a>
-            <button
-      type="submit"
-      onClick={() => {
-        navigate("/index.html"); // Correct way to navigate
-      }}
-    >
-      Sign In
-    </button>
+            <button type="submit" className="sign-in-btn">
+              Sign In
+            </button>
           </form>
         </div>
 
@@ -59,12 +66,16 @@ const Login = () => {
             <div className="toggle-panel toggle-left">
               <h1>Welcome Back!</h1>
               <p>Enter your personal details to use all site features</p>
-              <button className="hidden" onClick={toggleForm}>Sign In</button>
+              <button onClick={toggleForm} className="toggle-btn">
+                Sign In
+              </button>
             </div>
             <div className="toggle-panel toggle-right">
               <h1>Hello, Friend!</h1>
               <p>Register with your personal details to use all site features</p>
-              <button className="hidden" onClick={toggleForm}>Sign Up</button>
+              <button onClick={toggleForm} className="toggle-btn">
+                Sign Up
+              </button>
             </div>
           </div>
         </div>
