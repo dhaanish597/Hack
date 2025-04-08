@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-container animate__animated animate__fadeIn">
+    <h2 class="text-center mb-4 animate__animated animate__fadeInDown">
+        <i class="fas fa-farm me-2"></i>Farm Profile
+    </h2>
+    
+    <form method="POST" class="animate__animated animate__fadeInUp animate__delay-1s">
+        <div class="row mb-4">
+            <div class="col-md-4 text-center">
+                <div class="position-relative d-inline-block">
+                    <img src="{{ user.profile_picture or 'https://via.placeholder.com/150' }}" 
+                         alt="Profile Picture" 
+                         class="profile-picture mb-3">
+                    <button type="button" class="btn btn-sm btn-primary position-absolute bottom-0 end-0"
+                            style="border-radius: 50%; width: 32px; height: 32px;">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="mb-3 floating-input">
+                    <label for="email" class="form-label">
+                        <i class="fas fa-envelope me-2"></i>Email
+                    </label>
+                    <input type="email" 
+                           class="form-control" 
+                           id="email" 
+                           name="email" 
+                           value="{{ user.email }}" 
+                           required>
+                    <div class="form-text">Your contact email for notifications</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">
+                        <i class="fas fa-home me-2"></i>Farm Information
+                    </label>
+                    <div class="mb-3">
+                        <input type="text" 
+                               class="form-control" 
+                               name="farm_name" 
+                               placeholder="Farm Name"
+                               value="{{ user.farm_name or '' }}">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" 
+                               class="form-control" 
+                               name="farm_location" 
+                               placeholder="Farm Location"
+                               value="{{ user.farm_location or '' }}">
+                    </div>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input type="number" 
+                                   class="form-control" 
+                                   name="farm_size" 
+                                   placeholder="Farm Size"
+                                   step="0.1"
+                                   value="{{ user.farm_size or '' }}">
+                            <span class="input-group-text">acres</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">
+                        <i class="fas fa-seedling me-2"></i>Soil & Crops
+                    </label>
+                    <div class="mb-3">
+                        <select class="form-select" name="soil_type">
+                            <option value="" {% if not user.soil_type %}selected{% endif %}>Select Soil Type</option>
+                            <option value="Sandy" {% if user.soil_type == 'Sandy' %}selected{% endif %}>Sandy Soil</option>
+                            <option value="Clay" {% if user.soil_type == 'Clay' %}selected{% endif %}>Clay Soil</option>
+                            <option value="Silt" {% if user.soil_type == 'Silt' %}selected{% endif %}>Silt Soil</option>
+                            <option value="Loam" {% if user.soil_type == 'Loam' %}selected{% endif %}>Loam Soil</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" 
+                                  name="preferred_crops" 
+                                  rows="3"
+                                  placeholder="Enter your preferred crops (comma-separated)">{{ user.preferred_crops or '' }}</textarea>
+                        <div class="form-text">Example: Rice, Wheat, Cotton</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center animate__animated animate__fadeInUp animate__delay-2s">
+            <button type="submit" class="btn btn-primary me-2">
+                <i class="fas fa-save me-2"></i>Save Farm Profile
+            </button>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-times me-2"></i>Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .floating-input {
+        position: relative;
+    }
+
+    .floating-input input:focus,
+    .floating-input textarea:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+    }
+
+    .input-group-text {
+        background-color: var(--secondary-color);
+        border: none;
+    }
+
+    .form-switch .form-check-input {
+        background-color: var(--secondary-color);
+        border-color: var(--primary-color);
+    }
+
+    .form-switch .form-check-input:checked {
+        background-color: var(--primary-color);
+    }
+</style>
+
+
+<script>
+// Bio character counter
+const bioTextarea = document.getElementById('bio');
+const bioCount = document.getElementById('bioCount');
+
+bioTextarea.addEventListener('input', function() {
+    const count = this.value.length;
+    bioCount.textContent = count;
+    
+    if (count > 200) {
+        bioCount.style.color = 'red';
+        this.value = this.value.substring(0, 200);
+    } else {
+        bioCount.style.color = '';
+    }
+});
+
+// Trigger initial count
+bioTextarea.dispatchEvent(new Event('input'));
+
+// Form validation and animation
+const form = document.querySelector('form');
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Add loading state to submit button
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Saving...';
+    submitBtn.disabled = true;
+    
+    // Simulate form submission (replace with actual submission)
+    setTimeout(() => {
+        this.submit();
+    }, 1000);
+});
+
+// Input animations
+document.querySelectorAll('.form-control').forEach(input => {
+    input.addEventListener('focus', function() {
+        this.parentElement.classList.add('animate__animated', 'animate__pulse');
+    });
+    
+    input.addEventListener('blur', function() {
+        this.parentElement.classList.remove('animate__animated', 'animate__pulse');
+    });
+});
+</script>
+{% endblock %}

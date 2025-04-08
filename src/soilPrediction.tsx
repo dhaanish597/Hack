@@ -52,6 +52,13 @@ const CropFertilizerRecommendation: React.FC = () => {
                 setError(`Error: ${data.error}`);
             } else {
                 setResult(data);
+                // Save data to local storage
+                const predictionData = {
+                    ...numericData,
+                    crop: data.crop_prediction,
+                    fertilizer: data.fertilizer_prediction
+                };
+                localStorage.setItem("soilPrediction", JSON.stringify(predictionData));
             }
         } catch (err) {
             setError(err instanceof Error ? err.message : "Error: Unable to fetch data");

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-container animate__animated animate__fadeIn">
+    <div class="text-center mb-4">
+        <div class="position-relative d-inline-block mb-3">
+            <img src="{{ user.profile_picture or 'https://via.placeholder.com/150' }}" alt="Profile Picture" class="profile-picture">
+            <div class="profile-badge position-absolute bottom-0 end-0 bg-success rounded-circle p-2" 
+                 style="width: 32px; height: 32px; border: 3px solid white;" 
+                 title="Active Farmer">
+            </div>
+        </div>
+        <h2 class="animate__animated animate__fadeInUp">{{ user.username }}</h2>
+        <p class="text-muted animate__animated animate__fadeInUp animate__delay-1s">
+            <i class="fas fa-envelope me-2"></i>{{ user.email }}
+        </p>
+    </div>
+
+    <div class="row mb-4 animate__animated animate__fadeInUp animate__delay-2s">
+        <div class="col-md-6 mb-3">
+            <div class="p-3 bg-light rounded-3 hover-card h-100">
+                <h5 class="mb-3"><i class="fas fa-farm me-2"></i>Farm Details</h5>
+                <div class="text-start">
+                    <p><strong>Farm Name:</strong> {{ user.farm_name or 'Not specified' }}</p>
+                    <p><strong>Location:</strong> {{ user.farm_location or 'Not specified' }}</p>
+                    <p><strong>Size:</strong> {{ user.farm_size or '0' }} acres</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="p-3 bg-light rounded-3 hover-card h-100">
+                <h5 class="mb-3"><i class="fas fa-seedling me-2"></i>Soil & Crops</h5>
+                <div class="text-start">
+                    <p><strong>Soil Type:</strong> {{ user.soil_type or 'Not specified' }}</p>
+                    <p><strong>Preferred Crops:</strong> {{ user.preferred_crops or 'Not specified' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center animate__animated animate__fadeInUp animate__delay-3s">
+        <a href="{{ url_for('edit_profile') }}" class="btn btn-primary me-2">
+            <i class="fas fa-edit me-2"></i>Update Farm Profile
+        </a>
+        <a href="#" class="btn btn-success">
+            <i class="fas fa-leaf me-2"></i>Get Crop Recommendations
+        </a>
+    </div>
+</div>
+
+<style>
+    .hover-card {
+        transition: all 0.3s;
+        cursor: pointer;
+    }
+    
+    .hover-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        background-color: white !important;
+    }
+    
+    .profile-badge {
+        transition: all 0.3s;
+    }
+    
+    .profile-badge:hover {
+        transform: scale(1.1);
+    }
+</style>
+
+
+<script>
+document.getElementById('shareProfile').addEventListener('click', function() {
+    // Create a dummy share URL
+    const shareUrl = window.location.href;
+    
+    // Check if the Web Share API is available
+    if (navigator.share) {
+        navigator.share({
+            title: 'Check out my profile',
+            url: shareUrl
+        })
+        .catch(console.error);
+    } else {
+        // Fallback: Copy to clipboard
+        navigator.clipboard.writeText(shareUrl)
+            .then(() => {
+                alert('Profile link copied to clipboard!');
+            })
+            .catch(console.error);
+    }
+});
+
+// Add hover animation to stats cards
+document.querySelectorAll('.hover-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+    });
+});
+</script>
+{% endblock %}

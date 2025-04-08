@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-container animate__animated animate__fadeIn">
+    <h2 class="text-center mb-4">
+        <i class="fas fa-tractor me-2"></i>Register Farm Account
+    </h2>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger animate__animated animate__fadeIn">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="POST" class="animate__animated animate__fadeInUp animate__delay-1s">
+        <div class="mb-3">
+            <label for="username" class="form-label">
+                <i class="fas fa-user me-2"></i>Username
+            </label>
+            <input type="text" 
+                   class="form-control" 
+                   id="username" 
+                   name="username" 
+                   required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">
+                <i class="fas fa-envelope me-2"></i>Email
+            </label>
+            <input type="email" 
+                   class="form-control" 
+                   id="email" 
+                   name="email" 
+                   required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">
+                <i class="fas fa-lock me-2"></i>Password
+            </label>
+            <input type="password" 
+                   class="form-control" 
+                   id="password" 
+                   name="password" 
+                   required>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-user-plus me-2"></i>Create Account
+            </button>
+        </div>
+        <div class="text-center mt-3 animate__animated animate__fadeInUp animate__delay-2s">
+            <p>Already a farmer? <a href="{{ url_for('login') }}" class="text-decoration-none">
+                <i class="fas fa-sign-in-alt me-2"></i>Login here
+            </a></p>
+        </div>
+    </form>
+</div>
+{% endblock %}

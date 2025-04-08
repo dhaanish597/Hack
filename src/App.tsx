@@ -7,7 +7,7 @@ import Profile from "./profile";
 import CropFertilizerRecommendation from "./soilPrediction";
 import ChatBot from "./chatBot";
 import Community from "./Community";
-import "./app.css";
+import Analytics from "./Analytics";
 //import Analysis from "./Analysis";
 //import SoilPrediction from "./SoilPrediction";
 //import Analytics from "./Analytics";
@@ -27,6 +27,7 @@ const App: React.FC = () => {
             <Route path="/soil-prediction" element={<CropFertilizerRecommendation />} />
             <Route path="/chatBot" element={<ChatBot />} />
             <Route path="/community" element={<Community />} />
+            <Route path="/analytics" element={<Analytics />} />
           </Routes>
         </div>
       </div>

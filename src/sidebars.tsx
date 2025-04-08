@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaHome, FaUser, FaSeedling, FaChartLine, FaUsers, FaRobot } from "react-icons/fa";
 import "./app.css";
-import { Fa1, FaBots } from "react-icons/fa6";
 
 const Sidebar: React.FC = () => {
   return (
@@ -37,7 +36,7 @@ const Sidebar: React.FC = () => {
           </Link>
         </li>
         <li>
-          <Link to="#">
+          <Link to="/Analytics">
             <FaChartLine />
             <span>Analytics</span>
           </Link>

@@ -62,8 +62,9 @@ const CommunityForum: React.FC = () => {
       setContent("");
       loadPosts();
     } catch (error) {
-      console.error("Error creating post:", error);
-      alert(error.message || "Failed to create post. Please try again.");
+      const err = error as Error;
+      console.error("Error creating post:", err);
+      alert(err.message || "Failed to create post. Please try again.");
     }
   };
 

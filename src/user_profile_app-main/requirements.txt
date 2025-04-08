@@ -1,0 +1,8 @@
+Flask==2.2.5
+Werkzeug==2.2.3
+Flask-SQLAlchemy==3.0.2
+mysql-connector-python==8.0.26
+python-dotenv==0.19.0
+cryptography==3.4.7
+SQLAlchemy==1.4.41
+mysqlclient==2.1.1
