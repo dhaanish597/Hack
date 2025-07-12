@@ -117,8 +117,6 @@ const Analytics = () => {
   const PHGauge = ({ pH }: { pH: number }) => {
     const radius = 100;
     const circumference = Math.PI * radius;
-    const pHPosition = ((pH - 4) / 5) * circumference; // Map pH 4-9 to circumference
-
     return (
       <svg width="100%" height="200" viewBox="0 0 200 100">
         <path d="M10,90 A80,80 0 0,1 190,90" fill="none" stroke="#FF0000" strokeWidth="20" />
